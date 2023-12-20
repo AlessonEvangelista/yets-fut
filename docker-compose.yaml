@@ -1,0 +1,37 @@
+version: '3.9'
+services:
+
+  db:
+    image: mysql:latest
+    container_name: mysql-yetz
+    restart: always
+    platform: linux/x86_64
+    ports:
+      - "3309:3306"
+    volumes:
+      - mysql-volumes:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin12345678
+      MYSQL_DATABASE: mainRestaurante
+    
+
+  api:
+    container_name: yetz-fut
+    ports:
+      - "88:80"
+    volumes:
+      - ./backend:/var/www/html
+    build:
+      context: ./
+      dockerfile: ./dockerfile
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - db
+
+volumes:
+  mysql-volumes:
+
+networks:
+  default:
+    name: yetz-fut-app
