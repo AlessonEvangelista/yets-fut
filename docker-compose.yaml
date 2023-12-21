@@ -12,7 +12,7 @@ services:
       - mysql-volumes:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: admin12345678
-      MYSQL_DATABASE: mainRestaurante
+      MYSQL_DATABASE: Yetzfut
     
 
   api:
