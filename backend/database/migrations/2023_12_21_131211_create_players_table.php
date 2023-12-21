@@ -15,13 +15,11 @@ return new class() extends Migration {
             $table->unsignedBigInteger('users');
             $table->foreign('users')
                 ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+                ->on('users');
             $table->unsignedBigInteger('team_players');
             $table->foreign('team_players')
                 ->references('id')
-                ->on('team_players')
-                ->onDelete('cascade');
+                ->on('team_players');
             $table->timestamps();
         });
     }

@@ -22,6 +22,7 @@ return new class() extends Migration {
             $table->enum('level', Level::toArray());
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
