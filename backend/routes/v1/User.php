@@ -8,5 +8,4 @@ Route::controller(UserController::class)
         Route::resource('', 'UserController')->except([
                 'create', 'edit',
             ]);
-        // Route::get('/', 'index');
     });

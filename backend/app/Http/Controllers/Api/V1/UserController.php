@@ -3,15 +3,25 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Traits\HttpResponses;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    use HttpResponses;
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): JsonResponse
     {
+        return $this->response(
+            'Success',
+            200,
+            User::all()
+        );
     }
 
     /**
