@@ -9,7 +9,9 @@ class SoccerGinasium extends Model
 {
     use HasFactory;
 
+    protected $table = 'soccer_ginasium';
     protected $fillable = [
+        'name',
         'address',
         'nethborhood',
         'city',
