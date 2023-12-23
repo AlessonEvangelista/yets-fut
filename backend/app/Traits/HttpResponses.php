@@ -9,7 +9,7 @@ use Illuminate\Support\MessageBag;
 
 trait HttpResponses
 {
-    public function response(string $message, string|int $status, array|Model|Collection|JsonResource $data = [])
+    public function response(string $message, string|int $status, array|string|Model|Collection|JsonResource $data = [])
     {
         return response()->json([
             'message' => $message,

@@ -13,4 +13,16 @@ enum PositionPlay: Int
     {
         return array_column(PositionPlay::cases(), 'value');
     }
+
+    public static function getById(int $id): string
+    {
+        $name = '';
+        foreach (self::cases() as $value) {
+            if ($value->value === $id) {
+                $name = $value->name;
+            }
+        }
+
+        return $name;
+    }
 }
