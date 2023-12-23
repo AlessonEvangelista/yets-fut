@@ -14,4 +14,16 @@ enum Level: Int
     {
         return array_column(Level::cases(), 'value');
     }
+
+    public static function getById(int $id): string
+    {
+        $name = '';
+        foreach (self::cases() as $value) {
+            if ($value->value === $id) {
+                $name = $value->name;
+            }
+        }
+
+        return $name;
+    }
 }
