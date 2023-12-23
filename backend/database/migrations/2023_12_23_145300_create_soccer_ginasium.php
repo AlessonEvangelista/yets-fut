@@ -12,6 +12,7 @@ return new class() extends Migration {
     {
         Schema::create('soccer_ginasium', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('address');
             $table->string('nethborhood');
             $table->string('city');

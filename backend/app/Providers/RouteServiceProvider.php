@@ -50,6 +50,10 @@ class RouteServiceProvider extends ServiceProvider
                                     Route::prefix('users')
                                     ->name('users.')
                                     ->group(base_path('routes/v1/User.php'));
+
+                                    Route::prefix('soccer')
+                                        ->name('soccer.')
+                                        ->group(base_path('routes/v1/SoccerGinasium.php'));
                                 });
                         });
                 });

@@ -18,3 +18,4 @@ backend/.fleet
 backend/.idea
 backend/.vscode
 backend/storage
+.idea/*
