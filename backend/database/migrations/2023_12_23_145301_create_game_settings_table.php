@@ -12,8 +12,10 @@ return new class() extends Migration {
     {
         Schema::create('game_settings', function (Blueprint $table) {
             $table->id();
-            $table->string('soccer_field');
-            $table->string('address');
+            $table->unsignedBigInteger('soccer_ginasium');
+            $table->foreign('soccer_ginasium')
+                ->references('id')
+                ->on('soccer_ginasium');
             $table->date('game_date');
             $table->boolean('active')->default(false);
             $table->timestamps();
