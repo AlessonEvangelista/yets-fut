@@ -12,21 +12,28 @@ class GameSettings extends Model
     use HasFactory;
 
     protected $fillable = [
+        'players_count_per_team',
+        'sort_players',
+        'leveling',
+        'goalkeeper',
         'game_date',
+        'soccer_ginasium_id',
         'active',
     ];
 
     /**
      * Includes for search in API ( Not Implement ON MVP. But Set on Model for fuctures features).
      */
-    public $allowedIncludes = [];
+    public $allowedIncludes = [
+        'soccerGinasium' => 'soccerGinasium'
+    ];
 
     /**
      * Belong to to SoccerGinasium.
      */
-    public function SoccerGinasium(): BelongsTo
+    public function soccerGinasium(): BelongsTo
     {
-        return $this->belongsTo(SoccerGinasium::class, 'soccer_ginasium');
+        return $this->belongsTo(SoccerGinasium::class, 'soccer_ginasium_id');
     }
 
     /**
@@ -35,13 +42,5 @@ class GameSettings extends Model
     public function Teams(): HasMany
     {
         return $this->hasMany(TeamPlayers::class, 'gameSettings');
-    }
-
-    /**
-     * Has Many to Rules per Game.
-     */
-    public function Rules(): HasMany
-    {
-        return $this->hasMany(RulesGameSetting::class, 'GameSetting');
     }
 }

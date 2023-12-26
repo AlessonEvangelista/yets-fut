@@ -14,6 +14,7 @@ return new class() extends Migration {
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('game_settings');
+            $table->integer('teammId');
             $table->foreign('game_settings')
                 ->references('id')
                 ->on('game_settings')

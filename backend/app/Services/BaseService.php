@@ -21,6 +21,15 @@ class BaseService implements BaseServiceInterface
         $data = '';
         $query = $this->defaultQuery();
 
+        if (request()->include) {
+            $relations = explode(',', request()->include);
+
+            if ($diff = array_diff($relations, $this->defaultModel->allowedIncludes)) {
+                return throw new \Exception("The following includes are not allowed: '".implode(',', $diff)."', enabled: '".implode(',', $this->defaultModel->allowedIncludes)."'");
+            }
+            $query->with($relations ?? []);
+        }
+
         if (!empty(request()->search) && count($this->searchableColumns) > 0) {
             $query->where(function ($subQuery) {
                 foreach ($this->searchableColumns as $column) {
@@ -45,10 +54,18 @@ class BaseService implements BaseServiceInterface
         $query = $this->defaultQuery();
         $data = null;
 
+        if (request()->include) {
+            $relations = explode(',', request()->include);
+            if ($diff = array_diff($relations, array_keys($this->defaultModel->allowedIncludes))) {
+                throw new \Exception("The following includes are not allowed: '".implode(',', $diff)."', enabled: '".implode(',', array_keys($this->defaultModel->allowedIncludes))."'");
+            }
+            $query->with($relations ?? []);
+        }
+
         try {
             $data = $query->findOrFail($id);
         } catch (\Exception $e) {
-            $data = 'No result for data';
+            $data = 'No result for data ID: '.$id;
             $this->status = 400;
         }
 
@@ -98,22 +115,27 @@ class BaseService implements BaseServiceInterface
             $show = $this->show($id);
             $model = $show['data'];
 
-            try {
-                $transaction = DB::transaction(function () use ($data, $model) {
-                    $model->update($data);
+            if(gettype($model) === 'object') {
+                try {
+                    $transaction = DB::transaction(function () use ($data, $model) {
+                        $model->update($data);
 
-                    foreach ($data as $indice => $value) {
-                        if (is_array($value)) {
-                            $model->$indice()->sync($value, false);
+                        foreach ($data as $indice => $value) {
+                            if (is_array($value)) {
+                                $model->$indice()->sync($value, false);
+                            }
                         }
-                    }
 
-                    return $model->refresh();
-                });
-                $response = $transaction;
-            } catch (\Exception $e) {
+                        return $model->refresh();
+                    });
+                    $response = $transaction;
+                } catch (\Exception $e) {
+                    $this->status = 400;
+                    $response = $e->getMessage();
+                }
+            } else {
                 $this->status = 400;
-                $response = $e->getMessage();
+                $response = "Object id: ". $id ." Not find";
             }
         }
 

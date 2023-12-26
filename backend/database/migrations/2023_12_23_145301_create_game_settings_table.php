@@ -12,12 +12,21 @@ return new class() extends Migration {
     {
         Schema::create('game_settings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('soccer_ginasium');
-            $table->foreign('soccer_ginasium')
+            $table->integer('players_count_per_team')
+                ->default(6);
+            $table->boolean('sort_players')
+                ->default(true);
+            $table->boolean('leveling')
+                ->default(true);
+            $table->boolean('goalkeeper')
+                ->default(true);
+            $table->date('game_date');
+            $table->boolean('active')
+                ->default(false);
+            $table->unsignedBigInteger('soccer_ginasium_id');
+            $table->foreign('soccer_ginasium_id')
                 ->references('id')
                 ->on('soccer_ginasium');
-            $table->date('game_date');
-            $table->boolean('active')->default(false);
             $table->timestamps();
         });
     }
