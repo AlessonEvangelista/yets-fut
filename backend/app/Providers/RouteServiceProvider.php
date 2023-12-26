@@ -47,6 +47,7 @@ class RouteServiceProvider extends ServiceProvider
                                 ->prefix('v1')
                                 ->namespace('V1')
                                 ->group(function () {
+
                                     Route::prefix('users')
                                     ->name('users.')
                                     ->group(base_path('routes/v1/User.php'));
@@ -54,6 +55,10 @@ class RouteServiceProvider extends ServiceProvider
                                     Route::prefix('soccer')
                                         ->name('soccer.')
                                         ->group(base_path('routes/v1/SoccerGinasium.php'));
+
+                                    Route::prefix('games')
+                                        ->name('games.')
+                                        ->group(base_path('routes/v1/Game.php'));
                                 });
                         });
                 });
