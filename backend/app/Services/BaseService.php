@@ -16,6 +16,10 @@ class BaseService implements BaseServiceInterface
     protected array $searchableColumns = [];
     protected int $status = 200;
 
+    /**
+     * @return array
+     * @throws \Exception
+     */
     public function index(): array
     {
         $data = '';
@@ -49,6 +53,11 @@ class BaseService implements BaseServiceInterface
         return ['status' => $this->status, 'data' => $data];
     }
 
+    /**
+     * @param int $id
+     * @return array
+     * @throws \Exception
+     */
     public function show(int $id): array
     {
         $query = $this->defaultQuery();
@@ -72,6 +81,11 @@ class BaseService implements BaseServiceInterface
         return ['status' => $this->status, 'data' => $data];
     }
 
+    /**
+     * @param array $data
+     * @param array $validData
+     * @return array
+     */
     public function store(array $data, array $validData)
     {
         $valid = Validator::make($data, $validData);
@@ -103,6 +117,13 @@ class BaseService implements BaseServiceInterface
         return ['status' => $this->status, 'data' => $response];
     }
 
+    /**
+     * @param array $data
+     * @param array $validator
+     * @param int $id
+     * @return array
+     * @throws \Exception
+     */
     public function update(array $data, array $validator, int $id)
     {
         $valid = Validator::make($data, $validator);
@@ -142,6 +163,11 @@ class BaseService implements BaseServiceInterface
         return ['status' => $this->status, 'data' => $response];
     }
 
+    /**
+     * @param int $id
+     * @return array
+     * @throws \Exception
+     */
     public function destroy(int $id)
     {
         $response = null;
@@ -163,6 +189,10 @@ class BaseService implements BaseServiceInterface
         return ['status' => $this->status, 'data' => $response];
     }
 
+    /**
+     * @param string|Model $value
+     * @return $this
+     */
     public function setModel(string|Model $value): self
     {
         $this->defaultModel = $value instanceof Model ? $value : new $value();

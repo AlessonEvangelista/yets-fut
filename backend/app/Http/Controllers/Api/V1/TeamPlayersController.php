@@ -24,6 +24,10 @@ class TeamPlayersController extends Controller
         ];
     }
 
+    /**
+     * @return JsonResponse
+     * @throws \Exception
+     */
     public function index() : JsonResponse
     {
         $services = (new TeamPlayersService())
@@ -37,6 +41,10 @@ class TeamPlayersController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function store(Request $request) : JsonResponse
     {
         $this->validData();
@@ -68,7 +76,11 @@ class TeamPlayersController extends Controller
         }
     }
 
-    public function playersConfirm(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function playersConfirm(Request $request) : JsonResponse
     {
         $presenceConfirm =
             (new TeamPlayersService())
@@ -79,6 +91,26 @@ class TeamPlayersController extends Controller
             return $this->response('Sucesso', $presenceConfirm['status'], $presenceConfirm['data']);
         } else {
             return $this->errors('Something wrong: '.$presenceConfirm['data'], $presenceConfirm['status']);
+        }
+    }
+
+    /**
+     * @param string $id
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function playersSort(string $id): JsonResponse
+    {
+        $sortTeam = new TeamPlayersResources(
+            (new TeamPlayersService())
+                ->setModel(TeamPlayers::class)
+                ->sortTeam($id)
+        );
+
+        if ($sortTeam['status'] == 200) {
+            return $this->response('Sucesso', $sortTeam['status'], $sortTeam['data']);
+        } else {
+            return $this->errors('Something wrong: '.$sortTeam['data'], $sortTeam['status']);
         }
     }
 }

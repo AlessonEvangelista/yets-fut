@@ -15,8 +15,9 @@ class TeamPlayersResources extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id'   => $this->id,
             'name' => $this->name,
-            'Game' => new GameSettingsResources($this->gameSettings),
+            'game' => new GameSettingsResources($this->gameSettings),
             'players' => PlayersResource::collection($this->players),
         ];
     }
