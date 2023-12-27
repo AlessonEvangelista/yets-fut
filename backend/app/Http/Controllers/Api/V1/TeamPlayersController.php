@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\V1\TeamPlayersResources;
+use App\Models\Players;
 use App\Models\TeamPlayers;
 use App\Services\Api\V1\TeamPlayersService;
 use App\Traits\HttpResponses;
@@ -64,6 +65,20 @@ class TeamPlayersController extends Controller
             return $this->response('Success', $deleted['status']);
         } else {
             return $this->errors($deleted['data'], $deleted['status']);
+        }
+    }
+
+    public function playersConfirm(Request $request)
+    {
+        $presenceConfirm =
+            (new TeamPlayersService())
+                ->setModel(Players::class)
+                ->presenceConfirm($request->all());
+
+        if ($presenceConfirm['status'] == 200) {
+            return $this->response('Sucesso', $presenceConfirm['status'], $presenceConfirm['data']);
+        } else {
+            return $this->errors('Something wrong: '.$presenceConfirm['data'], $presenceConfirm['status']);
         }
     }
 }

@@ -10,4 +10,5 @@ Route::controller(TeamPlayersController::class)
         ])->parameters([
             '' => 'id',
         ]);
+        Route::post('/players-confirm', [TeamPlayersController::class,'playersConfirm'])->name('confirm');
     });

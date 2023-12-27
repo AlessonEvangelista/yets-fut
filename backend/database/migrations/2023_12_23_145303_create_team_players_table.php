@@ -13,7 +13,6 @@ return new class() extends Migration {
         Schema::create('team_players', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('teamm_id')->nullable();
             $table->unsignedBigInteger('game_settings_id');
             $table->foreign('game_settings_id')
                 ->references('id')
