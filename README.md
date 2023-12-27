@@ -36,4 +36,4 @@
 
 # Faltantes:
 
-   - [ Scribe para a Documentação, Front, Concluir o Sort por Nível ]
+   - [ Scribe para a Documentação, Front, Concluir o Sort por Nível, Publish API, and use github pages for consume API ]
