@@ -13,7 +13,6 @@ class TeamPlayers extends Model
 
     protected $fillable = [
         'name',
-        'team_id',
         'game_settings_id'
     ];
 

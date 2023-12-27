@@ -10,7 +10,11 @@ class Players extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'team_id',
+        'users_id',
+        'team_players_id'
+    ];
 
     /**
      * Includes for search in API ( Not Implement ON MVP. But Set on Model for fuctures features).
@@ -22,7 +26,7 @@ class Players extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'users');
+        return $this->belongsTo(User::class, 'users_id');
     }
 
     /**
