@@ -30,6 +30,6 @@ class Players extends Model
      */
     public function teamPlayers(): BelongsTo
     {
-        return $this->belongsTo(TeamPlayers::class, 'team_players');
+        return $this->belongsTo(TeamPlayers::class, 'team_players_id');
     }
 }

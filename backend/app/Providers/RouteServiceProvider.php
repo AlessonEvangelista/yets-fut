@@ -59,6 +59,10 @@ class RouteServiceProvider extends ServiceProvider
                                     Route::prefix('games')
                                         ->name('games.')
                                         ->group(base_path('routes/v1/Game.php'));
+
+                                    Route::prefix('team')
+                                        ->name('team.')
+                                        ->group(base_path('routes/v1/Team.php'));
                                 });
                         });
                 });

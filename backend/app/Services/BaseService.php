@@ -145,14 +145,19 @@ class BaseService implements BaseServiceInterface
     public function destroy(int $id)
     {
         $response = null;
-        try {
-            $element = $this->show($id);
-            $model = $element['data'];
+        $element = $this->show($id);
+        $model = $element['data'];
 
-            $response = $model->delete();
-        } catch (\Exception $e) {
+        if(gettype($model) === 'object') {
+            try {
+                $response = $model->delete();
+            } catch (\Exception $e) {
+                $this->status = 400;
+                $response = $e->getMessage();
+            }
+        } else {
             $this->status = 400;
-            $response = $e->getMessage();
+            $response = "Object id: ". $id ." Not find";
         }
 
         return ['status' => $this->status, 'data' => $response];
