@@ -6,7 +6,8 @@
 
   - #### [docker] - build's conf's to aplications 
   - #### [backend] - Path to API
-    - #### [Insomnia] - Export to json Route to Insomnia
+  - #### [Insomnia] - Export to json Route to Insomnia
+  - #### [Design] - all Project Doc's
     - #### [Design-architeture] - Path with MVP plaining design archituture implements
     - #### [Design-uml] - Path with Diagram's to plataform 
     
