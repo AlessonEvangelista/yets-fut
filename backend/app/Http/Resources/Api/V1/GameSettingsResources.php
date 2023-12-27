@@ -23,7 +23,7 @@ class GameSettingsResources extends JsonResource
             'goalkeeper' => (bool)$this->goalkeeper,
             'game_date' => $this->game_date,
             'active' => (bool)$this->active,
-            'soccer_ginasium' => new SoccerGinasiumResources($this->whenLoaded('soccerGinasium'))
+            'soccer_ginasium' => new SoccerGinasiumResources( $this->soccerGinasium )
         ];
     }
 }

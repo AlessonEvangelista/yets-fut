@@ -13,26 +13,31 @@ class TeamPlayers extends Model
 
     protected $fillable = [
         'name',
+        'team_id',
+        'game_settings_id'
     ];
 
     /**
      * Includes for search in API ( Not Implement ON MVP. But Set on Model for fuctures features).
      */
-    public $allowedIncludes = [];
+    public $allowedIncludes = [
+        'gameSettings' => 'gameSettings',
+        'players' => 'players'
+    ];
 
     /**
      * Relaption with game settings.
      */
     public function gameSettings(): BelongsTo
     {
-        return $this->belongsTo(GameSettings::class, 'game_settings');
+        return $this->belongsTo(GameSettings::class, 'game_settings_id');
     }
 
     /**
      * Has Many with Players per Team.
      */
-    public function Players(): HasMany
+    public function players(): HasMany
     {
-        return $this->hasMany(Players::class, 'teamPlayers');
+        return $this->hasMany(Players::class);
     }
 }

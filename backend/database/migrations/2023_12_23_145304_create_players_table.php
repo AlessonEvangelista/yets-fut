@@ -12,12 +12,12 @@ return new class() extends Migration {
     {
         Schema::create('players', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('users');
-            $table->foreign('users')
+            $table->unsignedBigInteger('users_id');
+            $table->foreign('users_id')
                 ->references('id')
                 ->on('users');
-            $table->unsignedBigInteger('team_players');
-            $table->foreign('team_players')
+            $table->unsignedBigInteger('team_players_id');
+            $table->foreign('team_players_id')
                 ->references('id')
                 ->on('team_players');
             $table->timestamps();
